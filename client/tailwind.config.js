@@ -22,6 +22,7 @@ module.exports = {
       },
       boxShadow: {
         'nav-bar': '0 0 8px 0 rgba(0,0,0,0.1)',
+        'country-card': '0 0 8px 0 rgba(0,0,0,0.1)',
       },
     },
   },
