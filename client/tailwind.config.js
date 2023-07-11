@@ -5,6 +5,7 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -14,6 +15,13 @@ module.exports = {
         'base-400': 'hsl(209, 23%, 22%)',
         'base-500': 'hsl(207, 26%, 17%)',
         'base-600': 'hsl(200, 15%, 8%)',
+      },
+      padding: {
+        'desktop-x': '5rem',
+        'mobile-x': '1.5rem',
+      },
+      boxShadow: {
+        'nav-bar': '0 0 8px 0 rgba(0,0,0,0.1)',
       },
     },
   },
