@@ -1,13 +1,22 @@
 'use client';
 
 import { Check, ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
-const filterType = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
+interface FilterProps {
+  filterName: string;
+  filterOptions: string[];
+  selectedFilter: string | null;
+  setFilter: Dispatch<SetStateAction<string | null>>;
+}
 
-export function Filter() {
+export function Filter({
+  filterName,
+  filterOptions,
+  selectedFilter,
+  setFilter,
+}: FilterProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState<string | null>(null);
 
   return (
     <div
@@ -16,10 +25,12 @@ export function Filter() {
     >
       <div className="w-full flex flex-row items-center justify-between bg-base-100 hover:bg-base-200 dark:bg-base-400 dark:hover:brightness-125 pl-filter-l pr-filter-r py-filter-y transition-all shadow-filter rounded-mobile">
         <div className="flex flex-col">
-          <span className={`${selected ? 'text-filter-sub' : ''}`}>
-            Filter by Region
+          <span className={`${selectedFilter ? 'text-filter-sub' : ''}`}>
+            {filterName}
           </span>
-          {selected ? <span className="font-semibold">{selected}</span> : null}
+          {selectedFilter ? (
+            <span className="font-semibold">{selectedFilter}</span>
+          ) : null}
         </div>
         <ChevronDown
           className={`scale-[65%] transition-all duration-200 ${
@@ -30,17 +41,19 @@ export function Filter() {
 
       {isOpen ? (
         <div className="absolute z-10 translate-y-1 w-full shadow-filter overflow-hidden bg-base-100 dark:bg-base-400 rounded-mobile">
-          {filterType.map((filter, idx) => (
+          {filterOptions.map((filter, idx) => (
             <div
               key={filter}
               className={`h-min flex flex-row items-center justify-between pl-filter-l pr-filter-r py-filter-y-sub cursor-pointer bg-base-100 hover:bg-base-200 dark:bg-base-400 dark:hover:brightness-125 transition-all animate-blur-in first:pt-6 last:pb-6`}
               style={{ animationDelay: `${50 * idx}ms` }}
               onClick={() =>
-                selected === filter ? setSelected(null) : setSelected(filter)
+                selectedFilter === filter ? setFilter(null) : setFilter(filter)
               }
             >
               {filter}
-              {selected === filter ? <Check className="scale-50" /> : null}
+              {selectedFilter === filter ? (
+                <Check className="scale-50" />
+              ) : null}
             </div>
           ))}
         </div>

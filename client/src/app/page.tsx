@@ -5,11 +5,13 @@ import { CountryCard } from '@/components/country-card/CountryCard';
 import { Filter } from '@/components/search-filter-section/Filter';
 import { SearchField } from '@/components/search-filter-section/SearchField';
 import { TResponseCountry } from '@/types/types';
+import { filterCountriesBySelection } from '@/utils/filter';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 
 export default function Home() {
   const [searchInput, setSearchInput] = useState('');
+  const [selectedFilter, setFilter] = useState<string | null>(null);
   const { data } = useQuery<TResponseCountry[]>(
     'countries',
     getAllCountriesData,
@@ -23,24 +25,19 @@ export default function Home() {
     },
   );
 
-  const handleSearchFilter = (countries: TResponseCountry[] | undefined) => {
-    if (!countries) {
-      return [];
-    }
-    if (!searchInput) {
-      return countries;
-    }
+  const handleFilter = filterCountriesBySelection(
+    selectedFilter,
+    (selection, item) => item.region.toLowerCase() === selection.toLowerCase(),
+  );
 
-    const filteredCountries = countries.filter((country) => {
-      return country.name.common
-        .toLowerCase()
-        .slice(0, searchInput.length)
-        .includes(searchInput.toLowerCase());
-    });
-    return filteredCountries;
-  };
+  const handleSearch = filterCountriesBySelection(
+    searchInput,
+    (selection, item) =>
+      item.name.common.slice(0, selection.length).toLowerCase() ===
+      selection.toLowerCase(),
+  );
 
-  const filteredData = handleSearchFilter(data);
+  const filteredData = handleSearch(handleFilter(data));
 
   return (
     <main className="min-h-screen w-screen pt-20 px-mobile-x break:px-desktop-x text-base-600 bg-base-200 dark:text-base-100 dark:bg-base-500 transition-colors">
@@ -50,7 +47,19 @@ export default function Home() {
           setValue={setSearchInput}
           filteredCountries={filteredData}
         />
-        <Filter />
+        <Filter
+          filterName="Filter by Region"
+          filterOptions={[
+            'Africa',
+            'Americas',
+            'Antarctic',
+            'Asia',
+            'Europe',
+            'Oceania',
+          ]}
+          selectedFilter={selectedFilter}
+          setFilter={setFilter}
+        />
       </div>
       <div className="grid place-items-center justify-between gap-y-10 gap-x-6 break:gap-20 grid-cols-cards pb-16">
         {filteredData?.map((country) => {
