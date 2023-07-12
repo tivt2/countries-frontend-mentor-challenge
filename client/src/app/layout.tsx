@@ -1,7 +1,8 @@
-import { NavBar } from '@/components/nav-bar/NavBar';
+import { WrapperContextProvider } from '@/contexts/WrapperContextProvider';
 import '../styles/main.css';
 import type { Metadata } from 'next';
 import { Nunito_Sans } from 'next/font/google';
+import { NavBar } from '@/components/nav-bar/NavBar';
 
 const nunitoSans = Nunito_Sans({
   weight: ['300', '600', '800'],
@@ -21,8 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunitoSans.className}>
-        <NavBar />
-        {children}
+        <WrapperContextProvider>
+          <NavBar />
+          {children}
+        </WrapperContextProvider>
       </body>
     </html>
   );

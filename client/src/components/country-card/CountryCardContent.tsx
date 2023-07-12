@@ -5,5 +5,9 @@ interface CoutryCardContentProps {
 }
 
 export function CountryCardContent({ children }: CoutryCardContentProps) {
-  return <div className="flex flex-col gap-1 p-8 pb-14">{children}</div>;
+  return (
+    <div className=" min-h-[11rem] flex flex-col gap-1 p-6 pt-7">
+      {children}
+    </div>
+  );
 }

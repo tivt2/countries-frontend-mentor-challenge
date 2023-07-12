@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -8,6 +9,9 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      screens: {
+        break: '768px',
+      },
       colors: {
         'base-100': 'hsl(0, 0%, 100%)',
         'base-200': 'hsl(0, 0%, 98%)',
@@ -18,11 +22,49 @@ module.exports = {
       },
       padding: {
         'desktop-x': '5rem',
-        'mobile-x': '1.5rem',
+        'mobile-x': '1rem',
+        'filter-y': '0.85rem',
+        'filter-l': '1.6rem',
+        'filter-r': '1rem',
+        'filter-y-sub': '0.6rem',
       },
       boxShadow: {
         'nav-bar': '0 0 8px 0 rgba(0,0,0,0.1)',
         'country-card': '0 0 8px 0 rgba(0,0,0,0.1)',
+        'search-field': '0 0 8px 0 rgba(0,0,0,0.1)',
+        filter: '0 0 8px 0 rgba(0,0,0,0.1)',
+      },
+      fontSize: {
+        'country-name': '1.2rem',
+        'country-stat': '0.85rem',
+        'filter-sub': '0.55rem',
+        filter: '0.78rem',
+        search: '0.78rem',
+      },
+      maxWidth: {
+        search: '29.3rem',
+        filter: '13rem',
+        card: '16rem',
+        'card-break': '20rem',
+      },
+      borderRadius: {
+        mobile: '0.35rem',
+      },
+      gridTemplateColumns: {
+        cards: 'repeat(auto-fit, minmax(16rem, 1fr))',
+      },
+      keyframes: {
+        'blur-in': {
+          '0%': {
+            opacity: 0,
+          },
+          '100%': {
+            opacity: 1,
+          },
+        },
+      },
+      animation: {
+        'blur-in': 'blur-in 150ms ease-in both',
       },
     },
   },

@@ -1,3 +1,5 @@
+'use client';
+
 import { CountryCardContext } from '@/contexts/CountryCardContext';
 import { Tcountry } from '@/types/types';
 import { CountryCardFlag } from './CountryCardFlag';
@@ -16,7 +18,7 @@ interface CountryCardProps {
 function CountryCard({ country, children }: CountryCardProps) {
   return (
     <CountryCardContext.Provider value={{ country }}>
-      <div className=" rounded-lg overflow-hidden bg-base-100 shadow-country-card">
+      <div className=" w-full max-w-card break:max-w-card-break rounded-mobile overflow-hidden bg-base-100 dark:bg-base-400 transition-colors shadow-country-card">
         {children}
       </div>
     </CountryCardContext.Provider>

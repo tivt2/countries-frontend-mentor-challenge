@@ -1,21 +1,33 @@
 'use client';
 
 import { Moon, Sun } from 'lucide-react';
-import { useState } from 'react';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 export function ThemeButton() {
-  const [isDark, setIsDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const { setTheme, resolvedTheme } = useTheme();
 
-  const lightIcon = <Moon className="scale-[65%] md:scale-75" />;
-  const darkIcon = <Sun className=" scale-[65%] md:scale-75" />;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  const lightIcon = (
+    <Moon className="scale-[65%] md:scale-75 stroke-base-600" />
+  );
+  const darkIcon = <Sun className=" scale-[65%] md:scale-75 stroke-base-100" />;
 
   return (
     <button
-      onClick={() => setIsDark((old) => !old)}
+      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
       className="flex items-center gap-[0.15rem] md:gap-1 text-xs font-semibold"
     >
-      {isDark ? darkIcon : lightIcon}
-      {isDark ? 'Light Mode' : 'Dark Mode'}
+      {resolvedTheme === 'dark' ? darkIcon : lightIcon}
+      {resolvedTheme === 'dark' ? 'Light Mode' : 'Dark Mode'}
     </button>
   );
 }

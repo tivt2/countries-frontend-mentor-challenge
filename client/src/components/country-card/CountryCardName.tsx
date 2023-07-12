@@ -5,5 +5,9 @@ export function CountryCardName() {
     country: { name },
   } = useCountryCardContext();
 
-  return <h4 className="text-2xl font-extrabold mb-4">{name}</h4>;
+  return (
+    <h4 className="text-country-name font-extrabold mb-4 leading-none">
+      {name}
+    </h4>
+  );
 }

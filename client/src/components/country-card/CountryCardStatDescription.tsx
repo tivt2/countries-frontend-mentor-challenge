@@ -8,7 +8,7 @@ export function CountryCardStatDescription({
   value,
 }: CountryCardStatDescriptionProps) {
   return (
-    <div>
+    <div className="text-country-stat">
       <span className="font-semibold">{stat}</span>
       <span>{value}</span>
     </div>
