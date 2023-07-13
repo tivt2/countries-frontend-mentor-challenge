@@ -12,6 +12,7 @@ export function CountryCardFlag() {
         src={flag}
         alt={`Country flag of ${name}`}
         quality={100}
+        priority
         fill
         style={{ objectFit: 'cover' }}
       />

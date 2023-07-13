@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 interface CoutryCardContentProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export function CountryCardContent({ children }: CoutryCardContentProps) {
