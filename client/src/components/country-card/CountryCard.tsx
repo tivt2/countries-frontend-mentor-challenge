@@ -10,12 +10,14 @@ import { CountryCardRegion } from './CountryCardRegion';
 import { CountryCardCapital } from './CountryCardCapital';
 import { CountryCardDummyFlag } from './CountryCardDummyFlag';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
+import { ReactNode } from 'react';
 
 interface CountryCardProps {
   country: Tcountry;
+  children: ReactNode;
 }
 
-function CountryCard({ country }: CountryCardProps) {
+function CountryCard({ country, children }: CountryCardProps) {
   const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>();
 
   return (
@@ -25,13 +27,7 @@ function CountryCard({ country }: CountryCardProps) {
     >
       {isVisible ? (
         <CountryCardContext.Provider value={{ country }}>
-          <CountryCard.Flag />
-          <CountryCard.Content>
-            <CountryCard.Name />
-            <CountryCard.Population />
-            <CountryCard.Region />
-            <CountryCard.Capital />
-          </CountryCard.Content>
+          {children}
         </CountryCardContext.Provider>
       ) : (
         <>

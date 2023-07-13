@@ -28,11 +28,16 @@ module.exports = {
         'filter-r': '1rem',
         'filter-y-sub': '0.6rem',
       },
+      gap: {
+        'page-stats': '0.65rem',
+      },
       boxShadow: {
         'nav-bar': '0 0 8px 0 rgba(0,0,0,0.1)',
         'country-card': '0 0 8px 0 rgba(0,0,0,0.1)',
         'search-field': '0 0 8px 0 rgba(0,0,0,0.1)',
         filter: '0 0 8px 0 rgba(0,0,0,0.1)',
+        buttons: '0 0 5px 0 rgba(0,0,0,0.3)',
+        flag: '0 0 10px 0 rgba(0,0,0,0.1)',
       },
       fontSize: {
         'country-name': '1.2rem',
@@ -40,6 +45,7 @@ module.exports = {
         'filter-sub': '0.55rem',
         filter: '0.78rem',
         search: '0.78rem',
+        buttons: '0.72rem',
       },
       maxWidth: {
         search: '29.3rem',
@@ -49,6 +55,7 @@ module.exports = {
       },
       borderRadius: {
         mobile: '0.35rem',
+        buttons: '0.15rem',
       },
       gridTemplateColumns: {
         cards: 'repeat(auto-fit, minmax(16rem, 1fr))',

@@ -1,10 +1,10 @@
 import { api } from '../api';
 
-const getCountryData = async (countryName: string) => {
-  const res = await api.get(`/${countryName}`);
+export const getCountryData = (countryName: string) => async () => {
+  const res = await api.get(`/name/${countryName}?fullText=true`);
 
   try {
-    return res.data;
+    return res.data[0];
   } catch (err) {
     console.log(`country ${countryName} error`, err);
   }

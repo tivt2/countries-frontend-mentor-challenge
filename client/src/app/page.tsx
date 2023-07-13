@@ -82,7 +82,15 @@ export default function Home() {
                 region: country.region,
                 capital: country.capital?.[0],
               }}
-            />
+            >
+              <CountryCard.Flag />
+              <CountryCard.Content>
+                <CountryCard.Name />
+                <CountryCard.Population />
+                <CountryCard.Region />
+                <CountryCard.Capital />
+              </CountryCard.Content>
+            </CountryCard>
           );
         })}
       </div>
