@@ -42,57 +42,59 @@ export default function Home() {
       selection.toLowerCase(),
   );
 
-  const defferedData = useDeferredValue(data?.slice(0, showingAmount));
+  const defferedData = useDeferredValue(data);
   const filteredData = handleSearch(handleFilter(defferedData));
 
   return (
-    <main className="min-h-screen w-screen pt-20 px-mobile-x break:px-desktop-x text-base-600 bg-base-200 dark:text-base-100 dark:bg-base-500 transition-colors">
-      <div className="flex flex-col break:flex-row justify-between gap-10 mt-6 mb-10">
-        <SearchField
-          value={searchInput}
-          setValue={setSearchInput}
-          filteredCountries={filteredData}
-        />
-        <Filter
-          filterName="Filter by Region"
-          filterOptions={[
-            'Africa',
-            'Americas',
-            'Antarctic',
-            'Asia',
-            'Europe',
-            'Oceania',
-          ]}
-          selectedFilter={selectedFilter}
-          setFilter={setFilter}
-        />
-      </div>
-      <div
-        ref={containerRef}
-        className="grid place-items-center justify-between gap-y-10 gap-x-6 break:gap-20 grid-cols-cards pb-16"
-      >
-        {filteredData?.map((country) => {
-          return (
-            <CountryCard
-              key={country.name.common}
-              country={{
-                flag: country.flags.svg,
-                name: country.name.common,
-                population: country.population,
-                region: country.region,
-                capital: country.capital?.[0],
-              }}
-            >
-              <CountryCard.Flag />
-              <CountryCard.Content>
-                <CountryCard.Name />
-                <CountryCard.Population />
-                <CountryCard.Region />
-                <CountryCard.Capital />
-              </CountryCard.Content>
-            </CountryCard>
-          );
-        })}
+    <main className="flex justify-center min-h-screen w-screen pt-20 break:pt-28 px-mobile-x break:px-desktop-x text-base-600 bg-base-200 dark:text-base-100 dark:bg-base-500 transition-colors">
+      <div className="w-full max-w-7xl">
+        <div className="flex flex-col break:flex-row justify-between gap-10 mt-6 mb-10">
+          <SearchField
+            value={searchInput}
+            setValue={setSearchInput}
+            filteredCountries={filteredData}
+          />
+          <Filter
+            filterName="Filter by Region"
+            filterOptions={[
+              'Africa',
+              'Americas',
+              'Antarctic',
+              'Asia',
+              'Europe',
+              'Oceania',
+            ]}
+            selectedFilter={selectedFilter}
+            setFilter={setFilter}
+          />
+        </div>
+        <div
+          ref={containerRef}
+          className="grid place-items-center justify-between gap-y-10 gap-x-6 break:gap-20 grid-cols-cards pb-16"
+        >
+          {filteredData.slice(0, showingAmount)?.map((country) => {
+            return (
+              <CountryCard
+                key={country.name.common}
+                country={{
+                  flag: country.flags.svg,
+                  name: country.name.common,
+                  population: country.population,
+                  region: country.region,
+                  capital: country.capital?.[0] || '',
+                }}
+              >
+                <CountryCard.Flag />
+                <CountryCard.Content>
+                  <CountryCard.Name />
+                  <CountryCard.Population />
+                  <CountryCard.Region />
+                  <CountryCard.Capital />
+                </CountryCard.Content>
+              </CountryCard>
+            );
+          })}
+        </div>
       </div>
     </main>
   );

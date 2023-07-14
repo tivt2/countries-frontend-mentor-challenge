@@ -28,9 +28,9 @@ export function CountryPageBorderCountries() {
   });
 
   return (
-    <div className="flex flex-col gap-5 text-[0.95rem] text-base-600 dark:text-base-100">
+    <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-5 text-[0.95rem] text-base-600 dark:text-base-100 whitespace-nowrap">
       <span className="font-semibold">Border Countries:</span>
-      <div className="relative -translate-y-1 w-full flex flex-wrap gap-2 whitespace-nowrap">
+      <div className="relative -translate-y-1 w-full flex flex-wrap gap-2">
         {names}
       </div>
     </div>

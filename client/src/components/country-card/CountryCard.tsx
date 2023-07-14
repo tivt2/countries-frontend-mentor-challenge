@@ -11,6 +11,7 @@ import { CountryCardCapital } from './CountryCardCapital';
 import { CountryCardDummyFlag } from './CountryCardDummyFlag';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface CountryCardProps {
   country: Tcountry;
@@ -19,11 +20,13 @@ interface CountryCardProps {
 
 function CountryCard({ country, children }: CountryCardProps) {
   const { ref, isVisible } = useIntersectionObserver<HTMLDivElement>();
+  const router = useRouter();
 
   return (
     <div
       ref={ref}
-      className=" w-full max-w-card break:max-w-card-break rounded-mobile overflow-hidden bg-base-100 dark:bg-base-400 transition-colors shadow-country-card"
+      className=" w-full max-w-card break:max-w-card-break rounded-mobile overflow-hidden bg-base-100 dark:bg-base-400 transition-colors shadow-country-card hover:brightness-90 dark:hover:brightness-125 cursor-pointer"
+      onClick={() => router.push(`/${country.name}`)}
     >
       {isVisible ? (
         <CountryCardContext.Provider value={{ country }}>

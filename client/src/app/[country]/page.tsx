@@ -17,7 +17,6 @@ export default function Country({ params }: CountryProps) {
     getCountryData(country),
     {
       onSuccess: (data) => {
-        console.log(data);
         return data;
       },
       onError: () => {
@@ -27,38 +26,40 @@ export default function Country({ params }: CountryProps) {
   );
 
   return (
-    <main className="w-screen min-h-screen bg-base-100 dark:bg-base-500 pt-28 px-5">
-      {!!data && (
-        <CountryPage country={data}>
-          <div className="flex flex-col gap-10">
-            <div className="flex flex-col gap-14">
-              <CountryPage.Button
-                text="Back"
-                icon={<MoveLeft className="scale-75" />}
-              />
-              <CountryPage.Flag />
-            </div>
-            <div className="flex flex-col gap-6">
-              <CountryPage.Name />
-              <div className="flex flex-col gap-10">
-                <div className="flex flex-col gap-page-stats">
-                  <CountryPage.NativeName />
-                  <CountryPage.Population />
-                  <CountryPage.Region />
-                  <CountryPage.SubRegion />
-                  <CountryPage.Capital />
+    <main className="w-screen min-h-screen flex justify-center bg-base-100 dark:bg-base-500 pt-28 md:pt-36 px-mobile-x md:px-desktop-x">
+      <div className="w-full max-w-7xl">
+        {!!data && (
+          <CountryPage country={data ?? []}>
+            <CountryPage.Button
+              text="Back"
+              icon={<MoveLeft className="scale-75" />}
+            />
+            <div className="flex flex-col lg:flex-row lg:justify-between gap-10 xl:gap-40 xl:items-center mt-12">
+              <div className="w-full self-start lg:w-[34rem] lg:min-w-[34rem]">
+                <CountryPage.Flag />
+              </div>
+              <div className="flex flex-col gap-6 w-full">
+                <CountryPage.Name />
+                <div className="flex flex-row gap-10 justify-between lg:flex-row flex-wrap lg:mb-6">
+                  <div className="flex flex-col gap-page-stats">
+                    {!!data.name.nativeName && <CountryPage.NativeName />}
+                    {!!data.population && <CountryPage.Population />}
+                    {!!data.region && <CountryPage.Region />}
+                    {!!data.subregion && <CountryPage.SubRegion />}
+                    {!!data.capital && <CountryPage.Capital />}
+                  </div>
+                  <div className="flex flex-col gap-page-stats">
+                    {!!data.tld && <CountryPage.Domains />}
+                    {!!data.currencies && <CountryPage.Currencies />}
+                    {!!data.languages && <CountryPage.Languages />}
+                  </div>
                 </div>
-                <div className="flex flex-col gap-page-stats">
-                  <CountryPage.Domains />
-                  <CountryPage.Currencies />
-                  <CountryPage.Languages />
-                </div>
-                <CountryPage.BorderCountries />
+                {!!data.borders && <CountryPage.BorderCountries />}
               </div>
             </div>
-          </div>
-        </CountryPage>
-      )}
+          </CountryPage>
+        )}
+      </div>
     </main>
   );
 }

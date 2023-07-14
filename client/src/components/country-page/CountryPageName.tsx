@@ -6,7 +6,7 @@ export function CountryPageName() {
   } = useCountryPageContext();
 
   return (
-    <h2 className="text-country-name font-extrabold leading-none">
+    <h2 className="text-country-name lg:text-2xl font-extrabold leading-none">
       {name.common}
     </h2>
   );
